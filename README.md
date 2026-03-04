@@ -13,7 +13,7 @@
 
 - Python 3.9+
 - Python modules:
-  pip install requests dnspython colorama python-nmap or pip install -r 
+  pip install -r requirements.txt
 
 ## Usage
 
