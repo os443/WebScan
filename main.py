@@ -51,7 +51,7 @@ def menu():
     print(f"""
 {Fore.CYAN}    +-----------------------
     |
-    | {Fore.YELLOW}WebscanV1 | By Os443{Fore.CYAN}
+    | {Fore.YELLOW}WebScan | By Os443{Fore.CYAN}
     |
     | {Fore.YELLOW}[1]{Fore.CYAN} Reconnaissance
     | {Fore.YELLOW}[2]{Fore.CYAN} Directory Bruteforce (dirsearch)
@@ -169,4 +169,5 @@ elif option == "2":
 else:
     print(f"{Fore.RED}    Invalid option{Style.RESET_ALL}")
     os._exit(1) 
+
 
