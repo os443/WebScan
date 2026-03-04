@@ -1,3 +1,28 @@
+"""
+MIT License
+
+Copyright (c) 2026
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+"""
+
 import socket
 import os
 import requests
@@ -5,6 +30,7 @@ import dns.resolver
 import ssl
 import nmap
 import subprocess
+import zipfile
 from urllib.parse import urljoin
 from datetime import datetime, timezone
 from colorama import Fore, Style, init
@@ -125,11 +151,16 @@ def recon():
         print(f"{Fore.WHITE}    SSL Information:{Style.RESET_ALL} {Fore.GREEN}Hidden")
 
 def bruteforce():
+    threads = input("    > Enter threads: ")
     print("    --------------------------------------------------------------------------------------------")
     print("    NOTE: This tool (dirsearch) is made by maurosoria (https://github.com/maurosoria) and not me")
     print("    --------------------------------------------------------------------------------------------")
-    threads = input("    > Enter threads: ")
-    subprocess.run(f"cd dirsearch && python dirsearch.py -u {target} -t {threads}", shell=True)
+
+    if os.path.exists('dirsearch/dirsearch.zip'):
+        zipfile.ZipFile('dirsearch/dirsearch.zip').extractall('dirsearch/')
+        os.remove('dirsearch/dirsearch.zip')
+
+    subprocess.run(f"cd dirsearch/dirsearch && python dirsearch.py -u {target} -t {threads}", shell=True)
             
 if option == "1":
     recon()
