@@ -11,13 +11,11 @@
 
 ## Requirements
 
-- Python 3.9+
-- Python modules:
-  pip install -r requirements.txt
+- Python (tested with 3.12)
 
-## Usage
+## Installation
 
-python webscan.py
+- pip install -r requirements.txt
 
 ## Notes
 
