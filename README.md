@@ -1,4 +1,4 @@
-# WebScan is a lightweight reconnaissance and directory brute-force tool written in Python.
+### WebScan is a lightweight reconnaissance and directory brute-force tool written in Python.
 
 ## Features
 
