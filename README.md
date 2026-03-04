@@ -20,7 +20,7 @@
 ## Notes
 
 - If the server is behind a CDN or proxy (Cloudflare, etc.), results may be shown as Hidden.
-- dirsearch is a third-party tool by maurosoria and is not authored by this project.
+- Dirsearch is a third-party tool by maurosoria and is not authored by this project.
 - Nmap is a third-party tool by Gordon Lyon and is not authored by this project.
 
 ## License
