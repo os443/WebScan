@@ -1,4 +1,4 @@
-## WebScan a lightweight reconnaissance tool written in Python.
+# WebScan a lightweight reconnaissance tool written in Python.
 
 ## Features
 
