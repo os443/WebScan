@@ -39,6 +39,7 @@ init(autoreset=True)
 
 serverFound = False
 httpFound = False
+scanner = nmap.PortScanner()
 
 def clear():
     if os.name == "nt":
@@ -51,10 +52,12 @@ def menu():
     print(f"""
 {Fore.CYAN}    +-----------------------
     |
-    | {Fore.YELLOW}WebScan | By Os443{Fore.CYAN}
+    | {Fore.YELLOW}WebScan | By os443 {Fore.CYAN}
     |
     | {Fore.YELLOW}[1]{Fore.CYAN} Reconnaissance
     | {Fore.YELLOW}[2]{Fore.CYAN} Directory Bruteforce (dirsearch)
+    | {Fore.YELLOW}[3]{Fore.CYAN} Nmap Scan
+    |
     {Style.RESET_ALL}
     """)
 
@@ -99,9 +102,6 @@ def recon():
             httpFound = True
             print(f"{Fore.WHITE}    {header}:{Style.RESET_ALL} {Fore.GREEN}{val}")
 
-    serverFound = False
-
-    scanner = nmap.PortScanner()
     scanner.scan(target, arguments="-sV -p 80,443")
     for host in scanner.all_hosts():
         for proto in scanner[host].all_protocols():
@@ -150,11 +150,26 @@ def recon():
     except:
         print(f"{Fore.WHITE}    SSL Information:{Style.RESET_ALL} {Fore.GREEN}Hidden")
 
+def nmap():
+    cmd = input("    > Enter nmap options (example: -sV -p 1-1000): ")
+    print()
+
+    scanner.scan(hosts=target, arguments=cmd)
+
+    for host in scanner.all_hosts():
+        print(f"   {Style.RESET_ALL} {Fore.GREEN}Host: {host}")
+        print(f"   {Style.RESET_ALL} {Fore.GREEN}State:", scanner[host].state())
+
+        for proto in scanner[host].all_protocols():
+            print(f"   {Style.RESET_ALL} {Fore.GREEN}Protocol:", proto)
+            ports = scanner[host][proto].keys()
+
+            for port in ports:
+                state = scanner[host][proto][port]['state']
+                print(f"   {Style.RESET_ALL} {Fore.GREEN}Port {port}: {state}")
+
 def bruteforce():
     threads = input("    > Enter threads: ")
-    print("    --------------------------------------------------------------------------------------------")
-    print("    NOTE: This tool (dirsearch) is made by maurosoria (https://github.com/maurosoria) and not me")
-    print("    --------------------------------------------------------------------------------------------")
 
     if os.path.exists('dirsearch/dirsearch.zip'):
         zipfile.ZipFile('dirsearch/dirsearch.zip').extractall('dirsearch/')
@@ -166,8 +181,8 @@ if option == "1":
     recon()
 elif option == "2":
     bruteforce()
+elif option == "3":
+    nmap()
 else:
     print(f"{Fore.RED}    Invalid option{Style.RESET_ALL}")
     os._exit(1) 
-
-
